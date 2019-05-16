@@ -18,9 +18,21 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.util.CommonUtil;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 @Controller
+@Api(value = "MainController", description = "Spring security controller")
 public class MainController {
 
+	@ApiOperation(value = "Index page", response = Iterable.class, tags = "index")
+	@ApiResponses(value = { 
+			@ApiResponse(code = 200, message = "Suceess|OK"),
+			@ApiResponse(code = 401, message = "not authorized!"), 
+			@ApiResponse(code = 403, message = "forbidden!!!"),
+			@ApiResponse(code = 404, message = "not found!!!") })
 	@RequestMapping(value = "/index", method = RequestMethod.GET)
 	public final ModelAndView defaultPage() {
 		ModelAndView model = new ModelAndView();

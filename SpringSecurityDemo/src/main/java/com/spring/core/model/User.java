@@ -10,7 +10,11 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiModelProperty;
+
 @Entity
+@Api(value = "User table", tags = "User credentials", description = "user details")
 @Table(name = "users")
 public class User {
 	/**
@@ -97,7 +101,8 @@ public class User {
 	}
 
 	@Id
- @Column(name = "username", unique = true, nullable = false, length = 45)
+	@Column(name = "username", unique = true, nullable = false, length = 45)
+	@ApiModelProperty(notes = "In database it will generat id")
  public final String getUsername() {
 		return this.username;
 	}
@@ -106,6 +111,7 @@ public class User {
 		this.username = username;
 	}
 
+	@ApiModelProperty(notes = "Password of user")
 	@Column(name = "password", nullable = false, length = 60)
  public final String getPassword() {
 		return this.password;
@@ -115,6 +121,7 @@ public class User {
 		this.password = password;
 	}
 
+	@ApiModelProperty(notes = "Status of login")
 	@Column(name = "enabled", nullable = false)
  public final boolean isEnabled() {
 		return this.enabled;
@@ -124,6 +131,7 @@ public class User {
 		this.enabled = enabled;
 	}
 
+	@ApiModelProperty(notes = "Role Id of user")
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
  public final Set<UserRole> getUserRole() {
 		return this.userRole;
